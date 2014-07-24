@@ -14,12 +14,13 @@ int luaAdd(int x, int y)
 int main()
 {
 	int sum = 0;
+	unsigned int t = 2^31;
 	L = lua_open();
 	luaL_openlibs(L);
 	luaL_dofile(L,"add.lua");
 	lua_pcall(L, 0, LUA_MULTRET, 0);
 	sum = luaAdd(10,15);
-	printf("%d",sum);
+	printf("%d",t);
 	lua_close(L);
 	return 0;
 }
