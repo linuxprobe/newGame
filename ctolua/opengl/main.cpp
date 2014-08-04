@@ -1,24 +1,35 @@
-#include <glut.h>
+﻿#include <glut.h>
 //#include "gl.h"
 #include <iostream>
 using namespace std;
-int POINT1[] = {10,10};
-int POINT2[] = {100,100};
+float POINT1[] = {30.0,10.0};
+float POINT2[] = {100.0,100.0};
 
+GLint pt[8][3] = {{0,0,0},{0,100,0},{100,0,0},{100,100,0},
+{0,0,100},{0,100,100},{100,0,100},{100,100,100} };
+void init(void){
+	glClearColor(0.0,0.0,0.0,0.0);//黑色清屏
+	glShadeModel(GL_FLAT);//单调着色
+
+}
 void myDisplay(void)
 
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	// 	glRasterPos2i(100,100);
-	// 	glutBitmapCharacter(GLUT_BITMAP_8_BY_13,98);
-	// 	glutStrokeCharacter(GLUT_BITMAP_8_BY_13,98);
-	//glRecti(200, 100, 50, 250);
-	glBegin(GL_LINES);
-	glVertex2iv(POINT1);
-	glVertex2iv(POINT2);
-	glEnd();
-
-	glFlush();
+	glClear(GL_COLOR_BUFFER_BIT);//清色彩缓冲区
+	glColor3f(1.0,1.0,1.0);//设置白色
+	glLoadIdentity();//加载单位矩阵
+	gluLookAt(5.0,5.0,5.0,0.0,0.0,0.0,0.0,1.0,0.0);//设置相机参数
+	glScaled(1.0,2.0,1.0);//x,y,z缩放比率
+	glutWireCube(1.0);//画立方体
+	glFlush();//立即绘制
+	
+}
+void reshape(int w,int h){
+	glViewport(0,0,(GLsizei)w,(GLsizei)h);//调整视口位置和大小
+	glMatrixMode(GL_PROJECTION);//切换到投影矩阵
+	glLoadIdentity();//加载单位阵至投影矩阵
+	glFrustum(-1.0,1.0,-1.0,1.0,1.5,20.0);//设置视景体
+	glMatrixMode(GL_MODELVIEW);//切换到模型视图矩阵
 }
 void setPeix(int xcord,int ycord)
 {
@@ -39,13 +50,14 @@ int main(int argc, char *argv[])
 
 	glutInitWindowSize(400, 400);
 
-	glutCreateWindow("��һ��OpenGL����");
+	glutCreateWindow("第一个OpenGL程序");
 
 	glMatrixMode(GL_PROJECTION);
 
 	gluOrtho2D(0.0,400.0,0.0,400.0);
-
+	init();
 	glutDisplayFunc(&myDisplay);
+	glutReshapeFunc(&reshape);
 
 	glutMainLoop();
 
