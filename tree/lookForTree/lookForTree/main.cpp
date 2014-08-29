@@ -1,4 +1,6 @@
 #include "iostream"
+#include "string"
+using namespace std;
 typedef struct node  {
 	struct node *left;
 	struct node *right;
@@ -41,12 +43,14 @@ void PreOrderTraverse(PTree T){
 int main()
 {
 	int a = 0;
-	PTree T;
-	T = creatTree();
-	PreOrderTraverse(T);
+	string str = "ie";
+	str.append("kk");
+	cout << str.begin() << "\n";
+	//PTree T;
+	//T = creatTree();
+	//PreOrderTraverse(T);
 	//scanf_s("%d",&a);
 	//printf("%d\n",a);
-	getchar();
 	
 	return 0;
 }

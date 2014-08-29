@@ -1,5 +1,6 @@
 ﻿#include "iostream"
-
+#include "thread"
+#include "TestClass.h"
 extern "C" {
 #include <lua.h> 
 #include <lauxlib.h>  
